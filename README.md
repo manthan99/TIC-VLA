@@ -16,7 +16,6 @@ University of California, Los Angeles (UCLA)
 
 ![overview](docs/img/framework.png)
 
----
 
 ## Overview
 
@@ -37,8 +36,8 @@ TIC-VLA introduces a **latency-aware Think-in-Control (TIC) architecture** for v
 ## Release Plan
 We are currently organizing the project for public release.
 - 📦 **Code Release:** June 2026
-- 🗂️ **Dataset Release:** June 2026
-- 🤖 Training scripts, evaluation benchmarks, and pretrained checkpoints will also be released.
+- 🗂️ **Dataset and Benchmark Release:** June 2026
+- 🤖 Trained checkpoints will also be released.
 Stay tuned for updates!
 
 ## Benchmark: DynaNav
