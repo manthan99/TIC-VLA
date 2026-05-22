@@ -20,8 +20,6 @@ University of California, Los Angeles (UCLA)
 
 ## Overview
 
-Stay tuned for new updates!
-
 TIC-VLA introduces a **latency-aware Think-in-Control (TIC) architecture** for vision-language-action (VLA) model for robot navigation in **dynamic, human-centric environments**.  
 
 - 🧠 **Think-in-Control Architecture**  
@@ -36,7 +34,12 @@ TIC-VLA introduces a **latency-aware Think-in-Control (TIC) architecture** for v
 - 🚶 **Dynamic, Human-Centric Navigation**  
   Evaluated in physics-accurate, photo-realistic environments with human-robot interactions and long-horizon instructions.
 
----
+## Release Plan
+We are currently organizing the project for public release.
+- 📦 **Code Release:** June 2026
+- 🗂️ **Dataset Release:** June 2026
+- 🤖 Training scripts, evaluation benchmarks, and pretrained checkpoints will also be released.
+Stay tuned for updates!
 
 ## Benchmark: DynaNav
 
@@ -47,14 +50,7 @@ We introduce **DynaNav**, a language-conditioned navigation benchmark designed t
 
 ![benchmark](docs/img/benchmark.png)
 
----
-## Release Plan
-We are currently organizing the project for public release.
-- 📦 **Code Release:** June 2026
-- 🗂️ **DynaNav Dataset Release:** June 2026
-- 🤖 Training scripts, evaluation benchmarks, and pretrained checkpoints will also be released.
-Stay tuned for updates!
----
+
 
 ## Citation
 If you find this repository useful for your research, please consider giving us a star 🌟 and citing our paper.
