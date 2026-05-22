@@ -1,7 +1,7 @@
  # <img src="docs/img/logo.png" width="35" height="35" style="vertical-align: bottom; margin-right: 10px;"> TIC-VLA
 
 [![website](https://img.shields.io/badge/Website-Explore%20Now-blueviolet?style=flat&logo=google-chrome)](https://ucla-mobility.github.io/TIC-VLA/)
-[![paper](https://img.shields.io/badge/ICML-2026-red.svg)](https://arxiv.org/abs/2602.02459)
+[![paper](https://img.shields.io/badge/Paper-ICML2026-red.svg)](https://arxiv.org/abs/2602.02459)
 [![dataset](https://img.shields.io/badge/Dataset-HuggingFace-F9D371.svg)](https://huggingface.co/datasets/handsomeYun/TIC-VLA)
 <!-- [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)]() -->
 
