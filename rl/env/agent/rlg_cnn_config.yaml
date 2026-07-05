@@ -1,0 +1,113 @@
+params:
+  seed: 123
+
+  env:
+    name: ticvla_nav
+    clip_actions: 1.0
+
+  algo:
+    name: a2c_continuous
+
+  model:
+    # continuous action Gaussian with learnable log-std
+    name: continuous_a2c_logstd
+
+  network:
+    # simple actor-critic with CNN frontend (no resnet)
+    name: mix_input_actor_critic
+    separate: False
+
+    # action space heads (Gaussian mu/sigma)
+    space:
+      continuous:
+        mu_activation: None
+        sigma_activation: None
+        mu_init:
+          name: default
+        sigma_init:
+          name: default
+        fixed_sigma: False
+
+    # --- PURE CNN FRONTEND ---
+    cnn:
+      permute_input: False
+      input_shape: [3, 480, 640]
+      # conv_depths: [32, 64, 128]
+      conv_depths: [16, 32, 64]
+      activation: relu
+      initializer:
+        name: default
+      regularizer:
+        name: 'None'
+
+    # --- MLP HEAD AFTER CNN ---
+    mlp:
+      # units: [512, 256, 128]
+      units: [128, 128, 128]
+      activation: elu
+      d2rl: False
+      initializer:
+        name: default
+      regularizer:
+        name: None
+
+  # checkpointing
+  load_checkpoint: False
+  load_path: ''
+
+  config:
+    name: ticvla_cnn_ppo
+    env_name: rlgpu
+    device: 'cuda:0'
+    device_name: 'cuda:0'
+    multi_gpu: False
+
+    # IMPORTANT: set ppo False for a2c_continuous
+    ppo: True
+    mixed_precision: False
+
+    # normalization
+    normalize_input: False
+    normalize_value: True
+    value_bootstrap: True
+    normalize_advantage: True
+
+    # runners
+    num_actors: -1          
+    horizon_length: 128 # env = 10, total = 320
+    minibatch_size: 128
+    # horizon_length: 32 # env = 10, total = 320
+    # minibatch_size: 32      
+    mini_epochs: 8 # More training per batch for complex curriculum
+    reward_shaper:
+      scale_value: 1.0  
+
+    # RL coefficients
+    gamma: 0.99
+    tau: 0.95
+    # entropy_coef: 0.1
+    entropy_coef: 0.05
+    critic_coef: 1.0
+    bounds_loss_coef: 0.01
+
+    # optimization
+    # learning_rate: 4.0e-4
+    learning_rate: 2.0e-4
+    lr_schedule: constant
+    schedule_type: legacy
+    kl_threshold: 0.01     # adaptive LR scheduler uses this
+
+    # PPO-only flags
+    e_clip: 0.2
+    clip_value: True
+    truncate_grads: True
+    grad_norm: 1.0
+
+    # sequence length for RNNs (not used; CNN+MLP only)
+    seq_length: 4
+
+    # logging / saving
+    max_epochs: 3000
+    save_best_after: 50
+    save_frequency: 200
+    score_to_win: 20000000000

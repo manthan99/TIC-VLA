@@ -1,0 +1,43 @@
+seed: 36
+navigation_method: ticvla
+success_threshold: 1.5
+
+episode_hospital_smoke:
+  scene: "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd"
+  start: [-3.0, -1.2, 0.01]
+  start_yaw: 0.0
+  goal: [9.72, 2.33, 0.01]
+  instruction: "Go straight ahead and stop at the front of the vending machine."
+  timeout: 70
+  num_people: 20
+  robot_type: "nova_carter"
+
+episode_office_smoke:
+  scene: "${TICVLA_DYNANAV_ROOT}/assets/office.usd"
+  start: [-10.6, -12.1, 0.01]
+  start_yaw: 90.0
+  goal: [-7.68, -25.53, 0.01]
+  instruction: "Go straight ahead through the hallway behind the black glass doors, then turn left at the end to approach the red emergency exit door."
+  timeout: 85
+  num_people: 20
+  robot_type: "nova_carter"
+
+episode_outdoor_smoke:
+  scene: "${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd"
+  start: [-34.05, 151.7, 6.1]
+  start_yaw: -123
+  goal: [-24.79, 165.96, 6.0]
+  instruction: "Go straight across the street and head toward the wall with the words 'Northside Branch Library.'"
+  timeout: 100
+  num_people: 20
+  robot_type: "nova_carter"
+
+episode_warehouse_smoke:
+  scene: "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd"
+  start: [-18.98, -14.3, 0.01]
+  start_yaw: -141
+  goal: [-2.9, 6.54, 0.01]
+  instruction: "Go straight and stop in front of Aisle 5, where traffic cones and a yellow caution sign block the entrance."
+  timeout: 70
+  num_people: 20
+  robot_type: "nova_carter"

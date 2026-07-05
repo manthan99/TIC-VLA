@@ -1,0 +1,30 @@
+isaacsim.replicator.agent:
+  version: 0.7.19
+  global:
+    seed: 26
+    simulation_length: 3000 # 100 seconds
+  scene:
+    asset_path: "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd"
+  sensor:
+    camera_num: 0
+  character:
+    asset_path:
+    command_file: default_command.txt
+    num: 50
+  robot:
+    command_file: default_robot_command.txt
+    nova_carter_num: 0
+    iw_hub_num: 0
+    write_data: true
+  replicator:
+    writer: IRABasicWriter
+    parameters:
+      output_dir: "${TICVLA_DYNANAV_ROOT}/output/hospital"
+      object_info_bounding_box_2d_tight: false
+      object_info_bounding_box_2d_loose: false
+      object_info_bounding_box_3d: false
+      agent_info_skeleton_data: false
+      semantic_filter_predicate: class:character|robot;id:*
+      image_output_format: jpg
+      rgb: true
+      camera_params: true
