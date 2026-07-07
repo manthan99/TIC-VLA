@@ -771,7 +771,7 @@ episode_52:
   instruction: Go straight across the street and head toward the wall with the words 'Northside Branch Library.'
   timeout: 120
   num_people: 200
-  robot_type: spot
+  robot_type: nova_carter
 episode_53:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
   start:
@@ -801,7 +801,7 @@ episode_54:
   instruction: Go straight along the sidewalk to the end of the building, then turn left and approach the black door ahead.
   timeout: 140
   num_people: 200
-  robot_type: spot
+  robot_type: nova_carter
 episode_55:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
   start:
@@ -831,7 +831,7 @@ episode_56:
   instruction: Move straight ahead to cross the street until reach the sidewalk, follow the curb to the left, then cross the street again and stop at the four black and white umbrellas.'
   timeout: 160
   num_people: 200
-  robot_type: spot
+  robot_type: nova_carter
 episode_57:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
   start:
@@ -861,7 +861,7 @@ episode_58:
   instruction: Go straight along the street, following the right-hand curve at the end of the block, and continue until you reach the yellow fire hydrant on the grass.
   timeout: 180
   num_people: 200
-  robot_type: spot
+  robot_type: nova_carter
 episode_59:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
   start:
@@ -891,7 +891,7 @@ episode_60:
   instruction: Go straight to the end of this street segment, then cross the sidewalk and move toward the street ahead. Continue forward along the street until you reach the two large flower pots in front of the black and white umbrellas.
   timeout: 200
   num_people: 200
-  robot_type: spot
+  robot_type: nova_carter
 episode_61:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:

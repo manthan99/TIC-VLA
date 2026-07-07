@@ -109,19 +109,6 @@ class NovaCarterTICVLA(BehaviorScript):
     _device = "cuda" if torch.cuda.is_available() else "cpu"
     _inference_mode = True
     # === Checkpoint Configuration ===
-    # All:
-    # _checkpoint_path = os.getenv("TICVLA_CHECKPOINT_PATH", "checkpoints/ticvla.ckpt")
-    
-    #Only Sim:
-    #_checkpoint_path = os.getenv("TICVLA_CHECKPOINT_PATH", "checkpoints/ticvla.ckpt")
-
-    #only Real:
-    # _checkpoint_path = os.getenv("TICVLA_CHECKPOINT_PATH", "checkpoints/ticvla.ckpt")
-    
-    #Action chunk 10
-    # _checkpoint_path = os.getenv("TICVLA_CHECKPOINT_PATH", "checkpoints/ticvla.ckpt")
-    
-    #Action chunk 50
     _checkpoint_path = os.getenv("TICVLA_CHECKPOINT_PATH", "checkpoints/ticvla.ckpt")
     
     
@@ -1426,93 +1413,6 @@ class NovaCarterTICVLA(BehaviorScript):
             w_fb = k_angular * self._yaw_err_filt   # Moderate feedback
             w_cmd = float(np.clip(w_ff + w_fb, -w_max, w_max))
         
-        # wps = waypoints[0].float().cpu().numpy()  # (T, 2) body/FLU: [x, y]
-        # target_idx = 9
-        # time_horizon = 1
-        
-        # x_1s = float(wps[target_idx, 0])  # x position at 1.0s relative to current (forward)
-        # y_1s = float(wps[target_idx, 1])  # y position at 1.0s relative to current (left)
-
-        # eps = 1e-3
-        # v_max = float(self._max_linear_velocity)
-        # w_max = float(self._max_angular_velocity)
-
-        # # Compute distance to 1.0s waypoint (only using x and y)
-        # distance_1s = math.sqrt(x_1s * x_1s + y_1s * y_1s)
-        
-        # if distance_1s < eps:
-        #     # Very close to target, stop
-        #     v_cmd = 0.0
-        #     w_cmd = 0.0
-        # else:
-        #     # Linear velocity: distance divided by time horizon
-        #     v_cmd = float(np.clip(distance_1s / time_horizon *1.1, 0.0, v_max))
-            
-        #     # Angular velocity: use a more robust approach that handles small x values
-        #     # When x is very small, atan2 becomes unstable, so use proportional control on lateral error
-        #     x_min_threshold = 0.05  # Minimum forward distance to use atan2
-        #     angular_gain = 1.2
-        #     max_angle_rad = 0.8
-            
-        #     if abs(x_1s) < x_min_threshold:
-        #         # When x is very small, use proportional control on lateral error directly
-        #         # Use a gain that scales with the lateral error, not the angle
-        #         # This prevents excessive turning when x is near zero
-        #         lateral_gain = 2.0  # Gain for lateral error (m/s per meter of lateral error)
-        #         w_cmd = float(np.clip(-lateral_gain * y_1s * angular_gain, -w_max, w_max))
-        #     else:
-        #         # Normal case: use atan2 for direction to waypoint, but cap the angle
-        #         direction_to_waypoint = math.atan2(y_1s, x_1s)
-        #         # Cap the angle to prevent excessive turning
-        #         direction_to_waypoint = np.clip(direction_to_waypoint, -max_angle_rad, max_angle_rad)
-        #         w_cmd = float(np.clip(direction_to_waypoint * angular_gain / time_horizon, -w_max, w_max))
-                
-        # wps = waypoints[0].float().cpu().numpy()  # (T,2) body/FLU
-        # T = len(wps)
-
-        # L_des = 1
-        # eps = 1e-3
-
-        # # --- build arc-length s along the waypoint polyline ---
-        # inc = np.diff(wps, axis=0)                          # (T-1,2)
-        # seg = np.hypot(inc[:, 0], inc[:, 1])                # segment lengths
-        # s = np.concatenate([[0.0], np.cumsum(seg)])         # (T,) arc-length
-
-        # # pick first index whose arc-length >= L_des
-        # j = int(np.searchsorted(s, L_des, side="left"))
-        # j = int(np.clip(j, 2, T - 3))
-
-        # xL, yL = float(wps[j, 0]), float(wps[j, 1])
-        # L = float(np.hypot(xL, yL))
-
-        # if L < eps:
-        #     v_cmd, w_cmd = 0.0, 0.0
-        # else:
-        #     # pure pursuit curvature
-        #     kappa = 2.0 * yL / (L * L)
-
-        #     v_max = float(self._max_linear_velocity)
-        #     w_max = float(self._max_angular_velocity)
-
-        #     # curvature-limited forward speed
-        #     v_kappa = w_max / (abs(kappa) + eps)
-        #     v_cmd = float(np.clip(min(v_max, v_kappa), 0.0, v_max))
-
-        #     # heading error to lookahead point
-        #     yaw_err = math.atan2(yL, xL)
-
-        #     # wrap-safe low-pass on yaw error
-        #     if not hasattr(self, "_yaw_err_filt"):
-        #         self._yaw_err_filt = yaw_err
-        #     alpha = 0.2
-        #     e = math.atan2(math.sin(yaw_err - self._yaw_err_filt),
-        #                 math.cos(yaw_err - self._yaw_err_filt))
-        #     self._yaw_err_filt += alpha * e
-
-        #     k_yaw = 0.8
-        #     w_ff = v_cmd * kappa
-        #     w_fb = k_yaw * self._yaw_err_filt
-        #     w_cmd = float(np.clip(w_ff + w_fb, -w_max, w_max))
 
         # CRITICAL: Check if we're waiting for inference after backup
         # IMPORTANT: We do NOT return early here - we must return vlm_generation_start_step
