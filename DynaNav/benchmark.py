@@ -128,6 +128,9 @@ class BenchmarkRunner:
         self._robot_contact_paths = set()       # prim paths we consider "robot bodies" for contact filtering
         self._contact_sensor_enabled = False
         self._contact_threshold = 10.0  # Minimum contact force to register as collision (N)
+        self._contact_duration_threshold_frames = 100  # Require sustained contact before counting collision
+        self._contact_consecutive_frames = 0
+        self._max_contact_consecutive_frames = 0
         self._contact_sensor_prim_path = None  # Path to the contact sensor prim
         self._contact_sensor_interface = None  # Contact sensor interface
         self._contact_sensors = []  # List of contact sensor instances
@@ -205,6 +208,7 @@ class BenchmarkRunner:
                 'spl': spl,
                 'path_length': self._calculate_path_length(),
                 'physical_collision_detected': self._physical_collision_detected,
+                'physical_collision_count': self._max_contact_consecutive_frames,
             }
             self.results.append(result)
 
@@ -254,6 +258,9 @@ class BenchmarkRunner:
         self._episode_start_position = None
         self._simulation_frame_count = 0
         self._episode_start_frame = 0
+        self._physical_collision_detected = False
+        self._contact_consecutive_frames = 0
+        self._max_contact_consecutive_frames = 0
         
         # Set goal threshold from episode config (fallback to global config, default to 1.5m)
         global_threshold = self._benchmark_config.get('success_threshold', 1.5)
@@ -320,6 +327,7 @@ class BenchmarkRunner:
                 'spl': spl,
                 'path_length': self._calculate_path_length(),
                 'physical_collision_detected': self._physical_collision_detected,
+                'physical_collision_count': self._max_contact_consecutive_frames,
             }
 
             # Clean up contact sensor
@@ -367,6 +375,8 @@ class BenchmarkRunner:
 
         # Reset physical collision tracking
         self._physical_collision_detected = False
+        self._contact_consecutive_frames = 0
+        self._max_contact_consecutive_frames = 0
 
         # Reset error counters
         self._position_update_error_count = 0
@@ -1171,6 +1181,8 @@ class BenchmarkRunner:
         # Clear previous contact tracking
         self._robot_contact_paths.clear()
         self._physical_collision_detected = False
+        self._contact_consecutive_frames = 0
+        self._max_contact_consecutive_frames = 0
         self._contact_sensors = []  # Store contact sensor instances
         
         # Find the main body/chassis prim to attach contact sensor
@@ -1206,7 +1218,7 @@ class BenchmarkRunner:
                 path="Contact_Sensor",
                 parent=body_prim_path,
                 sensor_period=-1,  # Update every physics step
-                min_threshold=0,  # Minimum force threshold
+                min_threshold=self._contact_threshold,  # Minimum force threshold in Newtons
                 max_threshold=10000000,  # Maximum force threshold
                 translation=Gf.Vec3d(0, 0, 0),
                 radius=-1,  # Use parent's collision geometry
@@ -1259,56 +1271,28 @@ class BenchmarkRunner:
 
 #             print(f"Contact sensor reading: {reading.value}, {reading.is_valid}, {reading.in_contact}")
             
-            # Check if we have a valid reading with contact
-            if reading.is_valid and reading.in_contact:
-                force = float(reading.value)
-                
-                self._physical_collision_detected = True
-                collision_info = {
-                    # 'object_path': f"{body0} <-> {body1}",
-                    # 'force': contact_force,
-                    # 'position': contact_pos,
-                    'frame': self._simulation_frame_count,
-                    'type': 'contact_sensor'
-                }
-                print(f"Contact sensor detected collision")
-                
-                # # Only register significant contacts above threshold
-                # if force >= self._contact_threshold:
-                #     # Get raw contact data for detailed info
-                #     raw_data = self._contact_sensor_interface.get_contact_sensor_raw_data(
-                #         self._contact_sensor_prim_path
-                #     )
-                    
-                #     print(f"Raw contact data: {raw_data}")
+            # Count only sustained, meaningful contact. A one-frame scrape or low-force
+            # physics jitter should not mark the whole episode as physical collision.
+            if reading.is_valid and reading.in_contact and float(reading.value) >= self._contact_threshold:
+                self._contact_consecutive_frames += 1
+                self._max_contact_consecutive_frames = max(
+                    self._max_contact_consecutive_frames,
+                    self._contact_consecutive_frames,
+                )
 
-                #     # Process raw contact data
-                #     for contact in raw_data:
-                #         body0 = str(contact.body0) if hasattr(contact, 'body0') else ""
-                #         body1 = str(contact.body1) if hasattr(contact, 'body1') else ""
-                        
-                #         # Get contact position
-                #         contact_pos = [0.0, 0.0, 0.0]
-                #         if hasattr(contact, 'position'):
-                #             contact_pos = [float(contact.position[0]), 
-                #                          float(contact.position[1]), 
-                #                          float(contact.position[2])]
-                        
-                #         # Get impulse/force
-                #         contact_force = force
-                #         if hasattr(contact, 'impulse'):
-                #             impulse = contact.impulse
-                #             contact_force = float(np.linalg.norm([impulse[0], impulse[1], impulse[2]]))
-                        
-                #         # Record collision
-                #         self._physical_collision_detected = True
-                #         collision_info = {
-                #             'object_path': f"{body0} <-> {body1}",
-                #             'force': contact_force,
-                #             'position': contact_pos,
-                #             'frame': self._simulation_frame_count,
-                #             'type': 'contact_sensor'
-                #         }
+                if (
+                    not self._physical_collision_detected
+                    and self._contact_consecutive_frames >= self._contact_duration_threshold_frames
+                ):
+                    self._physical_collision_detected = True
+                    print(
+                        "Contact sensor detected sustained collision "
+                        f"({self._contact_consecutive_frames} frames >= "
+                        f"{self._contact_duration_threshold_frames}, "
+                        f"force >= {self._contact_threshold:.1f} N)"
+                    )
+            else:
+                self._contact_consecutive_frames = 0
                             
         except Exception as e:
             if not hasattr(self, '_contact_read_error_logged'):

@@ -389,7 +389,7 @@ class TICVLA(nn.Module):
             input_dim=self.vlm.config.llm_config.hidden_size,
             hidden_dim=512,
             action_dim=2,
-            num_layers=6,
+            num_layers=3,
             num_chunks=30,
             kv_cache_feat_dim=kv_cache_feat_dim,  # Initialize kv_cache_proj in __init__
         ).to(self.device).to(torch.bfloat16)

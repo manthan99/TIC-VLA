@@ -214,7 +214,7 @@ class TICVLA(nn.Module):
         self,
         model_path: str = 'InternVL3-1B',
         action_horizon_steps: int = 30,
-        action_num_layers: int = 6,
+        action_num_layers: int = 3,
         train_vlm: bool = True,
     ) -> None:
         """

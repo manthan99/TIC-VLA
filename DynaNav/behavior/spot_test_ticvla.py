@@ -85,8 +85,8 @@ VY_MIN, VY_MAX = -1.5, 1.5
 WZ_MIN, WZ_MAX = -2.0, 2.0
 
 # safety bounds (your preference)
-VX_SAFE = 1.5
-VY_SAFE = 1.0   # I’d usually keep strafe smaller than forward
+VX_SAFE = 1.2
+VY_SAFE = 0.8
 WZ_SAFE = 1.0
 
 # TIC-VLA model components

@@ -1,7 +1,8 @@
-# Full DynaNav benchmark set.
+# Original DynaNav benchmark set, normalized to the benchmark_full.yaml structure.
 # Local USD scenes are resolved through TICVLA_DYNANAV_ROOT.
-seed: 3
+seed: 666
 navigation_method: ticvla
+success_threshold: 1.5
 episode_1:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
@@ -10,11 +11,11 @@ episode_1:
   - 0.01
   start_yaw: 0.0
   goal:
-  - 9.72
+  - 9.52
   - 2.33
   - 0.01
-  instruction: Go straight ahead and stop at the front of the vending machine.
-  timeout: 70
+  instruction: Go straight ahead and stop at the vending machine at front.
+  timeout: 40
   num_people: 0
   robot_type: nova_carter
 episode_2:
@@ -25,13 +26,13 @@ episode_2:
   - 0.01
   start_yaw: 0.0
   goal:
-  - 9.72
+  - 9.52
   - 2.33
   - 0.01
-  instruction: Go straight ahead and stop at the front of the vending machine.
-  timeout: 85
-  num_people: 15
-  robot_type: spot
+  instruction: Go straight ahead and stop at the front of the vending machine at front left.
+  timeout: 50
+  num_people: 10
+  robot_type: nova_carter
 episode_3:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
@@ -40,12 +41,12 @@ episode_3:
   - 0.01
   start_yaw: 0.0
   goal:
-  - 9.72
+  - 9.52
   - 2.33
   - 0.01
-  instruction: Go straight ahead and stop at the front of the vending machine.
-  timeout: 100
-  num_people: 30
+  instruction: Go straight ahead and stop at the front of the vending machine at front left.
+  timeout: 60
+  num_people: 20
   robot_type: nova_carter
 episode_4:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
@@ -55,13 +56,13 @@ episode_4:
   - 0.01
   start_yaw: 0.0
   goal:
-  - 9.72
+  - 9.52
   - 2.33
   - 0.01
-  instruction: Go straight ahead and stop at the front of the vending machine.
-  timeout: 115
-  num_people: 45
-  robot_type: spot
+  instruction: Go straight ahead and stop at the front of the vending machine at front left.
+  timeout: 70
+  num_people: 30
+  robot_type: nova_carter
 episode_5:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
@@ -70,1200 +71,1220 @@ episode_5:
   - 0.01
   start_yaw: 0.0
   goal:
-  - 9.72
+  - 9.52
   - 2.33
   - 0.01
-  instruction: Go straight ahead and stop at the front of the vending machine.
-  timeout: 130
-  num_people: 60
+  instruction: Go straight ahead and stop at the front of the vending machine at front left.
+  timeout: 80
+  num_people: 40
   robot_type: nova_carter
 episode_6:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 7.38
-  - 1.49
+  - 19.7
+  - 29.3
   - 0.01
-  start_yaw: 90.0
+  start_yaw: -90
   goal:
-  - -12.23
-  - 10.19
+  - 16.1
+  - -3.04
   - 0.01
-  instruction: "Move forward toward the staircase, then turn left to enter the hallway. Continue straight ahead and stop in front of the blue hospital bed on the right side of the hallway.\u201D"
-  timeout: 100
+  instruction: Walk straight down the hallway and stop at the red bed located to the right of the doors.
+  timeout: 55
   num_people: 0
-  robot_type: spot
+  robot_type: nova_carter
 episode_7:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 7.38
-  - 1.49
+  - 18.7
+  - 29.3
   - 0.01
-  start_yaw: 90.0
+  start_yaw: -90
   goal:
-  - -12.23
-  - 10.19
+  - 16.1
+  - -3.04
   - 0.01
-  instruction: "Move forward toward the staircase, then turn left to enter the hallway. Continue straight ahead and stop in front of the blue hospital bed on the right side of the hallway.\u201D"
-  timeout: 95
-  num_people: 15
+  instruction: Walk straight down the hallway and stop at the red bed located to the right of the doors.
+  timeout: 65
+  num_people: 10
   robot_type: nova_carter
 episode_8:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 7.38
-  - 1.49
+  - 19.7
+  - 29.3
   - 0.01
-  start_yaw: 90.0
+  start_yaw: -90
   goal:
-  - -12.23
-  - 10.19
+  - 16.1
+  - -3.04
   - 0.01
-  instruction: "Move forward toward the staircase, then turn left to enter the hallway. Continue straight ahead and stop in front of the blue hospital bed on the right side of the hallway.\u201D"
-  timeout: 110
-  num_people: 30
-  robot_type: spot
+  instruction: Walk straight down the hallway and stop at the red bed located to the right of the doors.
+  timeout: 75
+  num_people: 20
+  robot_type: nova_carter
 episode_9:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 7.38
-  - 1.49
+  - 19.7
+  - 29.3
   - 0.01
-  start_yaw: 90.0
+  start_yaw: -90
   goal:
-  - -12.23
-  - 10.19
+  - 16.1
+  - -3.04
   - 0.01
-  instruction: "Move forward toward the staircase, then turn left to enter the hallway. Continue straight ahead and stop in front of the blue hospital bed on the right side of the hallway.\u201D"
-  timeout: 125
-  num_people: 45
+  instruction: Walk straight down the hallway and stop at the red bed located to the right of the doors.
+  timeout: 85
+  num_people: 30
   robot_type: nova_carter
 episode_10:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 7.38
-  - 1.49
+  - 19.7
+  - 29.3
   - 0.01
-  start_yaw: 90.0
+  start_yaw: -90
   goal:
-  - -12.23
-  - 10.19
+  - 16.1
+  - -3.04
   - 0.01
-  instruction: "Move forward toward the staircase, then turn left to enter the hallway. Continue straight ahead and stop in front of the blue hospital bed on the right side of the hallway.\u201D"
-  timeout: 140
-  num_people: 60
-  robot_type: spot
+  instruction: Walk straight down the hallway and stop at the red bed located to the right of the doors.
+  timeout: 95
+  num_people: 40
+  robot_type: nova_carter
 episode_11:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 12.22
-  - 30.28
+  - 9.75
+  - 2.82
   - 0.01
-  start_yaw: 0
+  start_yaw: -145
   goal:
-  - 5.76
-  - 4.63
+  - -4.49
+  - -1.91
   - 0.01
-  instruction: Go straight and turn right to enter the hallway. Continue straight and turn right at the end to enter the lobby and reach the front desk.
-  timeout: 90
+  instruction: Go straight past the wheelchairs and stop at the water dispenser by the window.
+  timeout: 70
   num_people: 0
   robot_type: nova_carter
 episode_12:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 12.22
-  - 30.28
+  - 9.75
+  - 2.82
   - 0.01
-  start_yaw: 0
+  start_yaw: -145
   goal:
-  - 5.76
-  - 4.63
+  - -4.49
+  - -1.91
   - 0.01
-  instruction: Go straight and turn right to enter the hallway. Continue straight and turn right at the end to enter the lobby and reach the front desk.
-  timeout: 105
-  num_people: 15
-  robot_type: spot
+  instruction: Go straight past the wheelchairs and stop at the water dispenser by the window.
+  timeout: 85
+  num_people: 10
+  robot_type: nova_carter
 episode_13:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 12.22
-  - 30.28
+  - 9.75
+  - 2.82
   - 0.01
-  start_yaw: 0
+  start_yaw: -145
   goal:
-  - 5.76
-  - 4.63
+  - -4.49
+  - -1.91
   - 0.01
-  instruction: Go straight and turn right to enter the hallway. Continue straight and turn right at the end to enter the lobby and reach the front desk.
-  timeout: 120
-  num_people: 30
+  instruction: Go straight past the wheelchairs and stop at the water dispenser by the window.
+  timeout: 95
+  num_people: 20
   robot_type: nova_carter
 episode_14:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 12.22
-  - 30.28
+  - 9.75
+  - 2.82
   - 0.01
-  start_yaw: 0
+  start_yaw: -145
   goal:
-  - 5.76
-  - 4.63
+  - -4.49
+  - -1.91
   - 0.01
-  instruction: Go straight and turn right to enter the hallway. Continue straight and turn right at the end to enter the lobby and reach the front desk.
-  timeout: 135
-  num_people: 45
-  robot_type: spot
+  instruction: Go straight past the wheelchairs and stop at the water dispenser by the window.
+  timeout: 105
+  num_people: 30
+  robot_type: nova_carter
 episode_15:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 12.22
-  - 30.28
+  - 9.75
+  - 2.82
   - 0.01
-  start_yaw: 0
+  start_yaw: -145
   goal:
-  - 5.76
-  - 4.63
+  - -4.49
+  - -1.91
   - 0.01
-  instruction: Go straight and turn right to enter the hallway. Continue straight and turn right at the end to enter the lobby and reach the front desk.
-  timeout: 150
-  num_people: 60
+  instruction: Go straight past the wheelchairs and stop at the water dispenser by the window.
+  timeout: 115
+  num_people: 40
   robot_type: nova_carter
 episode_16:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 23.3
-  - -0.9
+  - 7.38
+  - 1.49
   - 0.01
+  start_yaw: 90.0
   goal:
-  - 5.0
-  - 3.0
-  start_yaw: 180
-  instruction: Exit the room and turn right to enter the hallway. Continue straight ahead and enter the last room at the left of the hallway with an open door.
-  timeout: 100
+  - -12.23
+  - 10.19
+  - 0.01
+  instruction: Move forward toward the staircase, then turn left to enter the hallway. Continue straight ahead and stop in front of the blue hospital bed on the right side of the hallway.
+  timeout: 85
   num_people: 0
-  robot_type: spot
+  robot_type: nova_carter
 episode_17:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 23.3
-  - -0.9
+  - 7.38
+  - 1.49
   - 0.01
+  start_yaw: 90.0
   goal:
-  - 5.0
-  - 3.0
-  start_yaw: 180
-  instruction: Exit the room and turn right to enter the hallway. Continue straight ahead and enter the last room at the left of the hallway with an open door.
-  timeout: 115
-  num_people: 15
+  - -12.23
+  - 10.19
+  - 0.01
+  instruction: Move forward toward the staircase, then turn left to enter the hallway. Continue straight ahead and stop in front of the blue hospital bed on the right side of the hallway.
+  timeout: 95
+  num_people: 10
   robot_type: nova_carter
 episode_18:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 23.3
-  - -0.9
+  - 7.38
+  - 1.49
   - 0.01
+  start_yaw: 90.0
   goal:
-  - 5.0
-  - 3.0
-  start_yaw: 180
-  instruction: Exit the room and turn right to enter the hallway. Continue straight ahead and enter the last room at the left of the hallway with an open door.
-  timeout: 130
-  num_people: 30
-  robot_type: spot
+  - -12.23
+  - 10.19
+  - 0.01
+  instruction: Move forward toward the staircase, then turn left to enter the hallway. Continue straight ahead and stop in front of the blue hospital bed on the right side of the hallway.
+  timeout: 100
+  num_people: 20
+  robot_type: nova_carter
 episode_19:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - 23.3
-  - -0.9
+  - 7.38
+  - 1.49
   - 0.01
+  start_yaw: 90.0
   goal:
-  - 5.0
-  - 3.0
-  start_yaw: 180
-  instruction: Exit the room and turn right to enter the hallway. Continue straight ahead and enter the last room at the left of the hallway with an open door.
-  timeout: 145
-  num_people: 45
+  - -12.23
+  - 10.19
+  - 0.01
+  instruction: Move forward toward the staircase, then turn left to enter the hallway. Continue straight ahead and stop in front of the blue hospital bed on the right side of the hallway.
+  timeout: 115
+  num_people: 30
   robot_type: nova_carter
 episode_20:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
+  - 7.38
+  - 1.49
+  - 0.01
+  start_yaw: 90.0
+  goal:
+  - -12.23
+  - 10.19
+  - 0.01
+  instruction: Move forward toward the staircase, then turn left to enter the hallway. Continue straight ahead and stop in front of the blue hospital bed on the right side of the hallway.
+  timeout: 130
+  num_people: 40
+  robot_type: nova_carter
+episode_21:
+  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
+  start:
   - 23.3
   - -0.9
   - 0.01
   goal:
-  - 5.0
-  - 3.0
-  start_yaw: 180
-  instruction: Exit the room and turn right to enter the hallway. Continue straight ahead and enter the last room at the left of the hallway with an open door.
-  timeout: 160
-  num_people: 60
-  robot_type: spot
-episode_21:
-  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
-  start:
-  - -26.9
-  - 7.8
+  - 20
+  - 24
   - 0.01
-  start_yaw: -90.0
-  goal:
-  - 12.0
-  - 7.5
-  instruction: Move forward, then turn left to enter the hallway. Continue straight until you reach the lobby. Go around the green sofa and stop near the water dispenser.
-  timeout: 110
+  start_yaw: 180
+  instruction: Exit the room and turn right to enter the hallway. Continue straight ahead and to the end of the hallway.
+  timeout: 115
   num_people: 0
   robot_type: nova_carter
 episode_22:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - -26.9
-  - 7.8
+  - 23.3
+  - -0.9
   - 0.01
-  start_yaw: -90.0
   goal:
-  - 12.0
-  - 7.5
-  instruction: Move forward, then turn left to enter the hallway. Continue straight until you reach the lobby. Go around the green sofa and stop near the water dispenser.
-  timeout: 125
-  num_people: 15
-  robot_type: spot
+  - 20
+  - 24
+  - 0.01
+  start_yaw: 180
+  instruction: Exit the room and turn right to enter the hallway. Continue straight ahead and to the end of the hallway.
+  timeout: 130
+  num_people: 10
+  robot_type: nova_carter
 episode_23:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - -26.9
-  - 7.8
+  - 23.3
+  - -0.9
   - 0.01
-  start_yaw: -90.0
   goal:
-  - 12.0
-  - 7.5
-  instruction: Move forward, then turn left to enter the hallway. Continue straight until you reach the lobby. Go around the green sofa and stop near the water dispenser.
-  timeout: 140
-  num_people: 30
+  - 20
+  - 24
+  - 0.01
+  start_yaw: 180
+  instruction: Exit the room and turn right to enter the hallway. Continue straight ahead and to the end of the hallway.
+  timeout: 145
+  num_people: 20
   robot_type: nova_carter
 episode_24:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - -26.9
-  - 7.8
+  - 23.3
+  - -0.9
   - 0.01
-  start_yaw: -90.0
   goal:
-  - 12.0
-  - 7.5
-  instruction: Move forward, then turn left to enter the hallway. Continue straight until you reach the lobby. Go around the green sofa and stop near the water dispenser.
-  timeout: 155
-  num_people: 45
-  robot_type: spot
+  - 20
+  - 24
+  - 0.01
+  start_yaw: 180
+  instruction: Exit the room and turn right to enter the hallway. Continue straight ahead and to the end of the hallway.
+  timeout: 160
+  num_people: 30
+  robot_type: nova_carter
 episode_25:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Hospital/hospital.usd
   start:
-  - -26.9
-  - 7.8
+  - 23.3
+  - -0.9
   - 0.01
-  start_yaw: -90.0
   goal:
-  - 12.0
-  - 7.5
-  instruction: Move forward, then turn left to enter the hallway. Continue straight until you reach the lobby. Go around the green sofa and stop near the water dispenser.
-  timeout: 170
-  num_people: 60
+  - 20
+  - 24
+  - 0.01
+  start_yaw: 180
+  instruction: Exit the room and turn right to enter the hallway. Continue straight ahead and to the end of the hallway.
+  timeout: 175
+  num_people: 40
   robot_type: nova_carter
 episode_26:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -10.6
-  - -10.01
+  - -2.85
+  - 9.6
   - 0.01
-  start_yaw: 90.0
+  start_yaw: -132
   goal:
-  - -7.68
-  - -25.53
+  - -13.4
+  - -1.2
   - 0.01
-  instruction: Go straight ahead through the hallway behind the black glass doors, then turn left at the end to approach the red emergency exit door.
-  timeout: 70
+  instruction: Go straight ahead and stop at the nearest elevator.
+  timeout: 50
   num_people: 0
-  robot_type: spot
+  robot_type: nova_carter
 episode_27:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -10.6
-  - -12.1
+  - -2.85
+  - 9.6
   - 0.01
-  start_yaw: 90.0
+  start_yaw: -132
   goal:
-  - -7.68
-  - -25.53
+  - -13.4
+  - -1.2
   - 0.01
-  instruction: Go straight ahead through the hallway behind the black glass doors, then turn left at the end to approach the red emergency exit door.
-  timeout: 85
-  num_people: 15
+  instruction: Go straight ahead and stop at the nearest elevator.
+  timeout: 60
+  num_people: 10
   robot_type: nova_carter
 episode_28:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -10.6
-  - -12.1
+  - -2.85
+  - 9.6
   - 0.01
-  start_yaw: 90.0
+  start_yaw: -132
   goal:
-  - -7.68
-  - -25.53
+  - -13.4
+  - -1.2
   - 0.01
-  instruction: Go straight ahead through the hallway behind the black glass doors, then turn left at the end to approach the red emergency exit door.
-  timeout: 100
-  num_people: 30
-  robot_type: spot
+  instruction: Go straight ahead and stop at the nearest elevator.
+  timeout: 70
+  num_people: 20
+  robot_type: nova_carter
 episode_29:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -10.6
-  - -12.1
+  - -2.85
+  - 9.6
   - 0.01
-  start_yaw: 90.0
+  start_yaw: -132
   goal:
-  - -7.68
-  - -25.53
+  - -13.4
+  - -1.2
   - 0.01
-  instruction: Go straight ahead through the hallway behind the black glass doors, then turn left at the end to approach the red emergency exit door.
-  timeout: 115
-  num_people: 45
+  instruction: Go straight ahead and stop at the nearest elevator.
+  timeout: 80
+  num_people: 30
   robot_type: nova_carter
 episode_30:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -10.6
-  - -12.1
+  - -2.85
+  - 9.6
   - 0.01
-  start_yaw: 90.0
+  start_yaw: -132
   goal:
-  - -7.68
-  - -25.53
+  - -13.4
+  - -1.2
   - 0.01
-  instruction: Go straight ahead through the hallway behind the black glass doors, then turn left at the end to approach the red emergency exit door.
-  timeout: 130
-  num_people: 60
-  robot_type: spot
+  instruction: Go straight ahead and stop at the nearest elevator.
+  timeout: 90
+  num_people: 40
+  robot_type: nova_carter
 episode_31:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - 3.52
-  - 29.34
+  - -8.2
+  - 52.2
   - 0.01
-  start_yaw: 170
+  start_yaw: 3.14
   goal:
-  - -18.5
-  - 25.93
+  - -3.0
+  - 10.87
   - 0.01
-  instruction: Go straight and enter the door between the two booksshelfs. Continue forward and veer left to appraoch the black sofa and silver desk with plant on top of it.
-  timeout: 80
+  instruction: Turn right and follow the blue carpet to the end of the hallway. Enter the room with the reception desk.
+  timeout: 65
   num_people: 0
   robot_type: nova_carter
 episode_32:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - 3.52
-  - 29.34
+  - -8.2
+  - 52.2
   - 0.01
-  start_yaw: 170
+  start_yaw: 3.14
   goal:
-  - -18.5
-  - 25.93
+  - -3.0
+  - 10.87
   - 0.01
-  instruction: Go straight and enter the door between the two booksshelfs. Continue forward and veer left to appraoch the black sofa and silver desk with plant on top of it.
-  timeout: 95
-  num_people: 15
-  robot_type: spot
+  instruction: Turn right and follow the blue carpet to the end of the hallway. Enter the room with the reception desk.
+  timeout: 75
+  num_people: 10
+  robot_type: nova_carter
 episode_33:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - 3.52
-  - 29.34
+  - -8.2
+  - 52.2
   - 0.01
-  start_yaw: 170
+  start_yaw: 3.14
   goal:
-  - -18.5
-  - 25.93
+  - -3.0
+  - 10.87
   - 0.01
-  instruction: Go straight and enter the door between the two booksshelfs. Continue forward and veer left to appraoch the black sofa and silver desk with plant on top of it.
-  timeout: 110
-  num_people: 30
+  instruction: Turn right and follow the blue carpet to the end of the hallway. Enter the room with the reception desk.
+  timeout: 85
+  num_people: 20
   robot_type: nova_carter
 episode_34:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - 3.52
-  - 29.34
+  - -8.2
+  - 52.2
   - 0.01
-  start_yaw: 170
+  start_yaw: 3.14
   goal:
-  - -18.5
-  - 25.93
+  - -3.0
+  - 10.87
   - 0.01
-  instruction: Go straight and enter the door between the two booksshelfs. Continue forward and veer left to appraoch the black sofa and silver desk with plant on top of it.
-  timeout: 125
-  num_people: 45
-  robot_type: spot
+  instruction: Turn right and follow the blue carpet to the end of the hallway. Enter the room with the reception desk.
+  timeout: 95
+  num_people: 30
+  robot_type: nova_carter
 episode_35:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - 3.52
-  - 29.34
+  - -8.2
+  - 52.2
   - 0.01
-  start_yaw: 170
+  start_yaw: 3.14
   goal:
-  - -18.5
-  - 25.93
+  - -3.0
+  - 10.87
   - 0.01
-  instruction: Go straight and enter the door between the two booksshelfs. Continue forward and veer left to appraoch the black sofa and silver desk with plant on top of it.
-  timeout: 140
-  num_people: 60
+  instruction: Turn right and follow the blue carpet to the end of the hallway. Enter the room with the reception desk.
+  timeout: 105
+  num_people: 40
   robot_type: nova_carter
 episode_36:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -15.2
-  - 12.7
-  - 0.01
-  start_yaw: 90
-  goal:
-  - -12.5
-  - 49
-  - 0.01
-  instruction: Go straight ahead, passing through the hallway behind the black glass doors, and then enter the open office area and stop at the white desk with the plant on it, located on the right side of the wall at the end.
-  timeout: -90
-  num_people: 0
-  robot_type: spot
-episode_37:
-  scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
-  start:
-  - -15.2
-  - 12.7
+  - -10.6
+  - -12.1
   - 0.01
   start_yaw: -90
   goal:
-  - -12.5
-  - 49
+  - -7.68
+  - -25.53
   - 0.01
-  instruction: Go straight ahead, passing through the hallway behind the black glass doors, and then enter the open office area and stop at the white desk with the plant on it, located on the right side of the wall at the end.
-  timeout: 105
-  num_people: 15
+  instruction: Go straight ahead through the hallway, then turn left at the end to approach the red emergency exit door.
+  timeout: 80
+  num_people: 0
+  robot_type: nova_carter
+episode_37:
+  scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
+  start:
+  - -10.6
+  - -12.8
+  - 0.01
+  start_yaw: -90.0
+  goal:
+  - -7.68
+  - -25.53
+  - 0.01
+  instruction: Go straight ahead through the hallway, then turn left at the end to approach the red emergency exit door.
+  timeout: 90
+  num_people: 10
   robot_type: nova_carter
 episode_38:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -15.2
-  - 12.7
+  - -10.6
+  - -12.1
   - 0.01
-  start_yaw: -90
+  start_yaw: -90.0
   goal:
-  - -12.5
-  - 49
+  - -7.68
+  - -25.53
   - 0.01
-  instruction: Go straight ahead, passing through the hallway behind the black glass doors, and then enter the open office area and stop at the white desk with the plant on it, located on the right side of the wall at the end.
-  timeout: 120
-  num_people: 30
-  robot_type: spot
+  instruction: Go straight ahead through the hallway, then turn left at the end to approach the red emergency exit door.
+  timeout: 100
+  num_people: 20
+  robot_type: nova_carter
 episode_39:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -15.2
-  - 12.7
+  - -10.6
+  - -12.1
   - 0.01
-  start_yaw: -90
+  start_yaw: -90.0
   goal:
-  - -12.5
-  - 49
+  - -7.68
+  - -25.53
   - 0.01
-  instruction: Go straight ahead, passing through the hallway behind the black glass doors, and then enter the open office area  and stop at the white desk with the plant on it, located on the right side of the wall at the end.
-  timeout: 135
-  num_people: 45
+  instruction: Go straight ahead through the hallway, then turn left at the end to approach the red emergency exit door.
+  timeout: 110
+  num_people: 30
   robot_type: nova_carter
 episode_40:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -15.2
-  - 12.7
+  - -10.6
+  - -12.1
   - 0.01
-  start_yaw: -90
+  start_yaw: -90.0
   goal:
-  - -12.5
-  - 49
+  - -7.68
+  - -25.53
   - 0.01
-  instruction: Go straight ahead, passing through the hallway behind the black glass doors, and then enter the open office area and stop at the white desk with the plant on it, located on the right side of the wall at the end.
-  timeout: 150
-  num_people: 60
-  robot_type: spot
+  instruction: Go straight ahead through the hallway, then turn left at the end to approach the red emergency exit door.
+  timeout: 120
+  num_people: 40
+  robot_type: nova_carter
 episode_41:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -16.7
-  - 52.4
+  - -3.04
+  - 48.1
   - 0.01
-  start_yaw: 0.0
+  start_yaw: -270
   goal:
-  - -3.0
-  - 12.5
+  - -15.5
+  - 54.7
   - 0.01
-  instruction: Go straight to step onto the blue carpet, then follow it all the way through. Continue along the blue carpet as it turns right into the hallway, and keep following it until you reach the lobby at the end.
-  timeout: 100
+  instruction: Go straight down the hallway, turn left at the end, then continue forward to enter the office room. Move inside and stop in front of the desk on the right.
+  timeout: 95
   num_people: 0
   robot_type: nova_carter
 episode_42:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -16.7
-  - 52.4
+  - -3.04
+  - 48.1
   - 0.01
-  start_yaw: 0.0
+  start_yaw: -270
   goal:
-  - -3.0
-  - 12.5
+  - -15.5
+  - 54.7
   - 0.01
-  instruction: Go straight to step onto the blue carpet, then follow it all the way through. Continue along the blue carpet as it turns right into the hallway, and keep following it until you reach the lobby at the end.
-  timeout: 115
-  num_people: 15
-  robot_type: spot
+  instruction: Go straight down the hallway, turn left at the end, then continue forward to enter the office room. Move inside and stop in front of the desk on the right.
+  timeout: 105
+  num_people: 10
+  robot_type: nova_carter
 episode_43:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -16.7
-  - 52.4
+  - -3.04
+  - 48.1
   - 0.01
-  start_yaw: 0.0
+  start_yaw: -270
   goal:
-  - -3.0
-  - 12.5
+  - -15.5
+  - 54.7
   - 0.01
-  instruction: Go straight to step onto the blue carpet, then follow it all the way through. Continue along the blue carpet as it turns right into the hallway, and keep following it until you reach the lobby at the end.
-  timeout: 130
-  num_people: 30
+  instruction: Go straight down the hallway, turn left at the end, then continue forward to enter the office room. Move inside and stop in front of the desk on the right.
+  timeout: 115
+  num_people: 20
   robot_type: nova_carter
 episode_44:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -16.7
-  - 52.4
+  - -3.04
+  - 48.1
   - 0.01
-  start_yaw: 0.0
+  start_yaw: -270
   goal:
-  - -3.0
-  - 12.5
+  - -15.5
+  - 54.7
   - 0.01
-  instruction: Go straight to step onto the blue carpet, then follow it all the way through. Continue along the blue carpet as it turns right into the hallway, and keep following it until you reach the lobby at the end.
-  timeout: 145
-  num_people: 45
-  robot_type: spot
+  instruction: Go straight down the hallway, turn left at the end, then continue forward to enter the office room. Move inside and stop in front of the desk on the right.
+  timeout: 125
+  num_people: 30
+  robot_type: nova_carter
 episode_45:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - -16.7
-  - 52.4
+  - -3.04
+  - 48.1
   - 0.01
-  start_yaw: 0.0
+  start_yaw: -270
   goal:
-  - -3.0
-  - 12.5
+  - -15.5
+  - 54.7
   - 0.01
-  instruction: Go straight to step onto the blue carpet, then follow it all the way through. Continue along the blue carpet as it turns right into the hallway, and keep following it until you reach the lobby at the end.
-  timeout: 160
-  num_people: 60
+  instruction: Go straight down the hallway, turn left at the end, then continue forward to enter the office room. Move inside and stop in front of the desk on the right.
+  timeout: 135
+  num_people: 40
   robot_type: nova_carter
 episode_46:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - 0.23
-  - 15.98
+  - -15.2
+  - 12.7
   - 0.01
   start_yaw: 90
   goal:
-  - 1.7
-  - 52.14
+  - -12.5
+  - 49
   - 0.01
-  instruction: Go straight to leave the conference room, then veer left to step onto the blue carpet. Follow the carpet and continue straight until you reach the blue wall. Turn right to enter the CEO's office and approach the black sofa.
+  instruction: Go straight ahead, passing through the hallway behind the black glass doors, and then enter the office desk area and stop at the white desk with the plant on it, located on the right side of the wall at the end.
   timeout: 110
   num_people: 0
-  robot_type: spot
+  robot_type: nova_carter
 episode_47:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - 0.23
-  - 15.98
+  - -15.2
+  - 12.7
   - 0.01
   start_yaw: 90
   goal:
-  - 1.7
-  - 52.14
+  - -12.5
+  - 49
   - 0.01
-  instruction: Go straight to leave the conference room, then veer left to step onto the blue carpet. Follow the carpet and continue straight until you reach the blue wall. Turn right to enter the CEO's office and approach the black sofa.
-  timeout: 125
-  num_people: 15
+  instruction: Go straight ahead, passing through the hallway behind the black glass doors, and then enter the office desk area and stop at the white desk with the plant on it, located on the right side of the wall at the end.
+  timeout: 120
+  num_people: 10
   robot_type: nova_carter
 episode_48:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - 0.23
-  - 15.98
+  - -15.2
+  - 12.7
   - 0.01
   start_yaw: 90
   goal:
-  - 1.7
-  - 52.14
+  - -12.5
+  - 49
   - 0.01
-  instruction: Go straight to leave the conference room, then veer left to step onto the blue carpet. Follow the carpet and continue straight until you reach the blue wall. Turn right to enter the CEO's office and approach the black sofa.
-  timeout: 140
-  num_people: 30
-  robot_type: spot
+  instruction: Go straight ahead, passing through the hallway behind the black glass doors, and then enter the office desk area and stop at the white desk with the plant on it, located on the right side of the wall at the end.
+  timeout: 120
+  num_people: 20
+  robot_type: nova_carter
 episode_49:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - 0.23
-  - 15.98
+  - -15.2
+  - 12.7
   - 0.01
   start_yaw: 90
   goal:
-  - 1.7
-  - 52.14
+  - -12.5
+  - 49
   - 0.01
-  instruction: Go straight to leave the conference room, then veer left to step onto the blue carpet. Follow the carpet and continue straight until you reach the blue wall. Turn right to enter the CEO's office and approach the black sofa.
-  timeout: 155
-  num_people: 45
+  instruction: Go straight ahead, passing through the hallway behind the black glass doors, and then enter the office desk area and stop at the white desk with the plant on it, located on the right side of the wall at the end.
+  timeout: 140
+  num_people: 30
   robot_type: nova_carter
 episode_50:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/office.usd
   start:
-  - 0.23
-  - 15.98
+  - -15.2
+  - 12.7
   - 0.01
   start_yaw: 90
   goal:
-  - 1.7
-  - 52.14
+  - -12.5
+  - 49
   - 0.01
-  instruction: Go straight to leave the conference room, then veer left to step onto the blue carpet. Follow the carpet and continue straight until you reach the blue wall. Turn right to enter the CEO's office and approach the black sofa.
-  timeout: 170
-  num_people: 60
-  robot_type: spot
+  instruction: Go straight ahead, passing through the hallway behind the black glass doors, and then enter the office desk area and stop at the white desk with the plant on it, located on the right side of the wall at the end.
+  timeout: 150
+  num_people: 40
+  robot_type: nova_carter
 episode_51:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
   start:
-  - -34.05
-  - 151.7
-  - 6.1
-  start_yaw: -123
+  - 26.9
+  - 148.8
+  - 6.85
+  start_yaw: 160
   goal:
-  - -24.79
-  - 165.96
-  - 6.0
-  instruction: Go straight across the street and head toward the wall with the words 'Northside Branch Library.'
+  - 9.39
+  - 154.52
+  - 5.97
+  instruction: Go straight until reach the black and white striped umbrellas.
   timeout: 100
-  num_people: 100
+  num_people: 200
   robot_type: nova_carter
+  success_threshold: 4
 episode_52:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
   start:
-  - -34.05
-  - 151.7
-  - 6.1
-  start_yaw: -123
+  - 26.9
+  - 148.8
+  - 6.85
+  start_yaw: 160
   goal:
-  - -24.79
-  - 165.96
-  - 6.0
-  instruction: Go straight across the street and head toward the wall with the words 'Northside Branch Library.'
-  timeout: 120
+  - 9.39
+  - 154.52
+  - 5.97
+  instruction: Go straight until reach the black and white striped umbrellas.
+  timeout: 150
   num_people: 200
   robot_type: nova_carter
+  success_threshold: 4
 episode_53:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
   start:
   - -24.79
   - 173.1
-  - 6.7
+  - 8
   start_yaw: 32
   goal:
-  - 1.43
-  - 213.47
-  - 6.56
-  instruction: Go straight along the sidewalk to the end of the building, then turn left and approach the black door ahead.
-  timeout: 140
+  - 2.2
+  - 193.8
+  - 6.55
+  instruction: Drive forward passing the pillars and stop when you reach the last pillar at the far end.
+  timeout: 150
   num_people: 100
   robot_type: nova_carter
+  success_threshold: 4
 episode_54:
   scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
   start:
   - -24.79
   - 173.1
-  - 6.7
+  - 8.5
   start_yaw: 32
   goal:
-  - 1.43
-  - 213.47
-  - 6.56
-  instruction: Go straight along the sidewalk to the end of the building, then turn left and approach the black door ahead.
-  timeout: 140
-  num_people: 200
-  robot_type: nova_carter
-episode_55:
-  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
-  start:
-  - -24.1
-  - 168.8
-  - 6.1
-  start_yaw: 32
-  goal:
-  - -12.12
-  - 126.2
-  - 5.78
-  instruction: Move straight ahead to cross the street until reach the sidewalk, follow the curb to the left, then cross the street again and stop at the four black and white umbrellas.'
-  timeout: 140
-  num_people: 100
-  robot_type: nova_carter
-episode_56:
-  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
-  start:
-  - -24.1
-  - 168.8
-  - 6.1
-  start_yaw: 32
-  goal:
-  - -12.12
-  - 126.2
-  - 5.78
-  instruction: Move straight ahead to cross the street until reach the sidewalk, follow the curb to the left, then cross the street again and stop at the four black and white umbrellas.'
-  timeout: 160
-  num_people: 200
-  robot_type: nova_carter
-episode_57:
-  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
-  start:
-  - -12.12
-  - 126.2
-  - 5.78
-  start_yaw: 32
-  goal:
-  - 48.15
-  - 193.43
-  - 5.97
-  instruction: Go straight along the street, following the right-hand curve at the end of the block, and continue until you reach the yellow fire hydrant on the grass.
-  timeout: 160
-  num_people: 100
-  robot_type: nova_carter
-episode_58:
-  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
-  start:
-  - -12.12
-  - 126.2
-  - 5.78
-  start_yaw: 32
-  goal:
-  - 48.15
-  - 193.43
-  - 5.97
-  instruction: Go straight along the street, following the right-hand curve at the end of the block, and continue until you reach the yellow fire hydrant on the grass.
-  timeout: 180
-  num_people: 200
-  robot_type: nova_carter
-episode_59:
-  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
-  start:
-  - -82.43
-  - 172.34
-  - 5.4
-  start_yaw: -23
-  goal:
-  - 31.4
-  - 115.17
-  - 6
-  instruction: Go straight to the end of this street segment, then cross the sidewalk and move toward the street ahead. Continue forward along the street until you reach the two large flower pots in front of the black and white umbrellas.
-  timeout: 180
-  num_people: 200
-  robot_type: nova_carter
-episode_60:
-  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
-  start:
-  - -82.43
-  - 172.34
-  - 5.4
-  start_yaw: -23
-  goal:
-  - 31.4
-  - 115.17
-  - 6
-  instruction: Go straight to the end of this street segment, then cross the sidewalk and move toward the street ahead. Continue forward along the street until you reach the two large flower pots in front of the black and white umbrellas.
+  - 2.2
+  - 193.8
+  - 6.55
+  instruction: Drive forward passing the pillars and stop when you reach the last pillar at the far end.
   timeout: 200
   num_people: 200
   robot_type: nova_carter
+  success_threshold: 4
+episode_55:
+  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
+  start:
+  - -34.0
+  - 150.6
+  - 6.25
+  start_yaw: 80.0
+  goal:
+  - -24.02
+  - 173.3
+  - 6.3
+  instruction: Cross the street straight ahead, then proceed forward to the Northside Branch Library with the circular window at front. Do not turn right.
+  timeout: 200
+  num_people: 100
+  robot_type: nova_carter
+  success_threshold: 1
+episode_56:
+  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
+  start:
+  - -34.0
+  - 150.6
+  - 6.25
+  start_yaw: 80
+  goal:
+  - -24.02
+  - 173.3
+  - 6.3
+  instruction: Cross the street straight ahead, then proceed forward to the Northside Branch Library with the circular window at front. Do not turn right.
+  timeout: 250
+  num_people: 200
+  robot_type: nova_carter
+  success_threshold: 4
+episode_57:
+  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
+  start:
+  - 2.26
+  - 147.4
+  - 8
+  start_yaw: -90
+  goal:
+  - 2.26
+  - 137.6
+  - 6.09
+  instruction: Cross the street and continue straight until you reach the storefront with the yellow UPSWAY sign.
+  timeout: 250
+  num_people: 100
+  robot_type: nova_carter
+  success_threshold: 1
+episode_58:
+  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
+  start:
+  - -11.5
+  - 173.4
+  - 8
+  start_yaw: -54
+  goal:
+  - 2.26
+  - 137.6
+  - 6.09
+  instruction: Cross the street and continue straight until you reach the storefront with the yellow UPSWAY sign.
+  timeout: 300
+  num_people: 200
+  robot_type: nova_carter
+  success_threshold: 2.0
+episode_59:
+  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
+  start:
+  - -18.04
+  - 111.52
+  - 6.5
+  start_yaw: 60
+  goal:
+  - -10.5
+  - 146.22
+  - 5.99
+  instruction: Continue forward, go down the ramp by the slopeon the left side of the red triangular yield sign, then head toward the fountain.
+  timeout: 200
+  num_people: 100
+  robot_type: nova_carter
+  success_threshold: 4
+episode_60:
+  scene: ${TICVLA_DYNANAV_ROOT}/assets/outdoor_small.usd
+  start:
+  - -18.04
+  - 111.52
+  - 6.5
+  start_yaw: 20
+  goal:
+  - -10.5
+  - 146.22
+  - 5.99
+  instruction: Continue forward, turn left to go down the ramp on the left side of the red triangular yield sign, then head toward the fountain.
+  timeout: 250
+  num_people: 200
+  robot_type: nova_carter
+  success_threshold: 4
 episode_61:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -18.98
-  - -14.3
+  - -10.22
+  - -7.36
   - 0.01
-  start_yaw: -141
+  start_yaw: 90
   goal:
-  - -2.9
-  - 6.54
+  - -3.26
+  - 7.61
   - 0.01
-  instruction: Go straight and stop in front of Aisle 5, where traffic cones and a yellow caution sign block the entrance.
+  instruction: Proceed to the traffic cones at the entrance of Aisle 05 (the second aisle from the right).
   timeout: 70
   num_people: 0
   robot_type: nova_carter
 episode_62:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -18.98
-  - -14.3
+  - -10.22
+  - -7.36
   - 0.01
-  start_yaw: -141
+  start_yaw: 90
   goal:
-  - -2.9
-  - 6.54
+  - -3.26
+  - 7.61
   - 0.01
-  instruction: Go straight and stop in front of Aisle 5, where traffic cones and a yellow caution sign block the entrance.
-  timeout: 85
-  num_people: 15
-  robot_type: spot
+  instruction: Proceed to the yellow forklift at the entrance of Aisle 06 (the first aisle from the right).
+  timeout: 80
+  num_people: 10
+  robot_type: nova_carter
 episode_63:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -18.98
-  - -14.3
+  - -10.22
+  - -7.36
   - 0.01
-  start_yaw: -141
+  start_yaw: 90
   goal:
-  - -2.9
-  - 6.54
+  - -3.26
+  - 7.61
   - 0.01
-  instruction: Go straight and stop in front of Aisle 5, where traffic cones and a yellow caution sign block the entrance.
-  timeout: 100
-  num_people: 30
+  instruction: Proceed to the yellow forklift at the entrance of Aisle 06 (the first aisle from the right).
+  timeout: 90
+  num_people: 20
   robot_type: nova_carter
 episode_64:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -18.98
-  - -14.3
+  - -10.22
+  - -7.36
   - 0.01
-  start_yaw: -141
+  start_yaw: 90
   goal:
-  - -2.9
-  - 6.54
+  - -3.26
+  - 7.61
   - 0.01
-  instruction: Go straight and stop in front of Aisle 5, where traffic cones and a yellow caution sign block the entrance.
-  timeout: 115
-  num_people: 45
-  robot_type: spot
+  instruction: Proceed to the yellow forklift at the entrance of Aisle 06 (the first aisle from the right).
+  timeout: 100
+  num_people: 30
+  robot_type: nova_carter
 episode_65:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -18.98
-  - -14.3
+  - -10.22
+  - -7.36
   - 0.01
-  start_yaw: -141
+  start_yaw: 90
   goal:
-  - -2.9
-  - 6.54
+  - -3.26
+  - 7.61
   - 0.01
-  instruction: Go straight and stop in front of Aisle 5, where traffic cones and a yellow caution sign block the entrance.
-  timeout: 130
-  num_people: 60
+  instruction: Proceed to the yellow forklift at the entrance of Aisle 06 (the first aisle from the right).
+  timeout: 110
+  num_people: 40
   robot_type: nova_carter
 episode_66:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -2.9
-  - -13.8
+  - -7.3
+  - 19.8
   - 0.01
   start_yaw: -90
   goal:
   - -22.43
   - 22.95
   - 0.01
-  instruction: Go straight to enter c 1 and continue walking to its end.
-  timeout: 80
+  instruction: Go straight to leave the current aisle, then turn right to approach the fire extinguisher cabinet on the wall.
+  timeout: 115
   num_people: 0
-  robot_type: spot
+  robot_type: nova_carter
 episode_67:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -2.9
-  - -13.8
+  - -7.3
+  - 19.8
   - 0.01
   start_yaw: -90
   goal:
   - -22.43
   - 22.95
   - 0.01
-  instruction: Go straight to enter c 1 and continue walking to its end.
-  timeout: 95
-  num_people: 15
+  instruction: Go straight to leave the current aisle.  Turn right to approach the fire extinguisher cabinet on the wall.
+  timeout: 125
+  num_people: 10
   robot_type: nova_carter
 episode_68:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -2.9
-  - -13.8
-  - 0.01
-  start_yaw: -90
-  goal:
-  - -22.43
-  - 22.95
-  - 0.01
-  instruction: Go straight to enter c 1 and continue walking to its end.
-  timeout: 110
-  num_people: 30
-  robot_type: spot
-episode_69:
-  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
-  start:
-  - -2.9
-  - -13.8
-  - 0.01
-  start_yaw: -90
-  goal:
-  - -22.43
-  - 22.95
-  - 0.01
-  instruction: Go straight to enter c 1 and continue walking to its end.
-  timeout: 125
-  num_people: 45
-  robot_type: nova_carter
-episode_70:
-  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
-  start:
-  - -2.9
-  - -13.8
-  - 0.01
-  start_yaw: -90
-  goal:
-  - -22.43
-  - 22.95
-  - 0.01
-  instruction: Go straight to enter c 1 and continue walking to its end.
-  timeout: 140
-  num_people: 60
-  robot_type: spot
-episode_71:
-  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
-  start:
   - -7.3
   - 19.8
   - 0.01
-  start_yaw: -90
-  goal:
-  - -22.43
-  - 22.95
-  - 0.01
-  instruction: Go straight to leave the current aisle, then turn right to approach the fire extinguisher cabinet on the wall.
-  timeout: 90
-  num_people: 0
-  robot_type: nova_carter
-episode_72:
-  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
-  start:
-  - -7.3
-  - 19.8
-  - 0.01
-  start_yaw: -90
-  goal:
-  - -22.43
-  - 22.95
-  - 0.01
-  instruction: Go straight to leave the current aisle, then turn right to approach the fire extinguisher cabinet on the wall.
-  timeout: 105
-  num_people: 15
-  robot_type: spot
-episode_73:
-  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
-  start:
-  - -7.3
-  - 19.8
-  - 0.01
-  start_yaw: -90
-  goal:
-  - -22.43
-  - 22.95
-  - 0.01
-  instruction: Go straight to leave the current aisle, then turn right to approach the fire extinguisher cabinet on the wall.
-  timeout: 120
-  num_people: 30
-  robot_type: nova_carter
-episode_74:
-  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
-  start:
-  - -7.3
-  - 19.8
-  - 0.01
-  start_yaw: -90
+  start_yaw: 90
   goal:
   - -22.43
   - 22.95
   - 0.01
   instruction: Go straight to leave the current aisle, then turn right to approach the fire extinguisher cabinet on the wall.
   timeout: 135
-  num_people: 45
-  robot_type: spot
-episode_75:
+  num_people: 20
+  robot_type: nova_carter
+episode_69:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
   - -7.3
   - 19.8
   - 0.01
-  start_yaw: -90
+  start_yaw: 90
   goal:
   - -22.43
   - 22.95
   - 0.01
   instruction: Go straight to leave the current aisle, then turn right to approach the fire extinguisher cabinet on the wall.
-  timeout: 150
-  num_people: 60
+  timeout: 145
+  num_people: 30
+  robot_type: nova_carter
+episode_70:
+  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
+  start:
+  - -7.3
+  - 19.8
+  - 0.01
+  start_yaw: 90
+  goal:
+  - -22.43
+  - 22.95
+  - 0.01
+  instruction: Go straight to leave the current aisle, then turn right to approach the fire extinguisher cabinet on the wall.
+  timeout: 155
+  num_people: 40
+  robot_type: nova_carter
+episode_71:
+  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
+  start:
+  - -15.79
+  - -8.7
+  - 0.01
+  start_yaw: 80
+  goal:
+  - -22.8
+  - 23.4
+  - 0.01
+  instruction: Enter Aisle 01, the leftmost aisle, and continue to the end.
+  timeout: 85
+  num_people: 0
+  robot_type: nova_carter
+episode_72:
+  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
+  start:
+  - -15.79
+  - -8.7
+  - 0.01
+  start_yaw: 80
+  goal:
+  - -22.8
+  - 23.4
+  - 0.01
+  instruction: Enter Aisle 01, the leftmost aisle, and continue to the end.
+  timeout: 95
+  num_people: 10
+  robot_type: nova_carter
+episode_73:
+  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
+  start:
+  - -15.79
+  - -5.7
+  - 0.01
+  start_yaw: 80
+  goal:
+  - -22.8
+  - 23.4
+  - 0.01
+  instruction: Enter Aisle 01, the leftmost aisle, and continue to the end.
+  timeout: 105
+  num_people: 20
+  robot_type: nova_carter
+episode_74:
+  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
+  start:
+  - -15.79
+  - -5.7
+  - 0.01
+  start_yaw: 80
+  goal:
+  - -22.8
+  - 23.4
+  - 0.01
+  instruction: Enter Aisle 01, the leftmost aisle, and continue to the end.
+  timeout: 115
+  num_people: 30
+  robot_type: nova_carter
+episode_75:
+  scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
+  start:
+  - -15.79
+  - -5.7
+  - 0.01
+  start_yaw: 80
+  goal:
+  - -22.8
+  - 23.4
+  - 0.01
+  instruction: Enter Aisle 01, the leftmost aisle, and continue to the end.
+  timeout: 125
+  num_people: 40
   robot_type: nova_carter
 episode_76:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - 1.52
-  - 14.28
+  - -13.22
+  - -6.36
   - 0.01
-  start_yaw: -90
+  start_yaw: 59
   goal:
-  - -22.43
-  - 22.95
+  - 1.82
+  - 24.5
   - 0.01
-  instruction: Turn around to exit the current aisle from the back. Then turn left to enter Aisle 5 and stop in front of the traffic cones.
-  timeout: 100
+  instruction: Go straight to enter Aisle 06 (the last aisle from the left), passing the yellow forklift to reach the end of the aisle.
+  timeout: 250
   num_people: 0
-  robot_type: spot
+  robot_type: nova_carter
 episode_77:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - 1.52
-  - 14.28
+  - -13.22
+  - -6.36
   - 0.01
-  start_yaw: -90
+  start_yaw: 59
   goal:
-  - -22.43
-  - 22.95
+  - 1.82
+  - 24.5
   - 0.01
-  instruction: Turn around to exit the current aisle from the back. Then turn left to enter Aisle 5 and stop in front of the traffic cones.
-  timeout: 115
-  num_people: 15
+  instruction: Go straight to enter Aisle 06 (the last aisle from the left), passing the yellow forklift to reach the end of the aisle.
+  timeout: 160
+  num_people: 10
   robot_type: nova_carter
 episode_78:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - 1.52
-  - 14.28
+  - -13.22
+  - -6.36
   - 0.01
-  start_yaw: -90
+  start_yaw: 59
   goal:
-  - -22.43
-  - 22.95
+  - 1.82
+  - 24.5
   - 0.01
-  instruction: Turn around to exit the current aisle from the back. Then turn left to enter Aisle 5 and stop in front of the traffic cones.
-  timeout: 130
-  num_people: 30
-  robot_type: spot
+  instruction: Go straight to enter Aisle 06 (the last aisle from the left), passing the yellow forklift to reach the end of the aisle.
+  timeout: 170
+  num_people: 20
+  robot_type: nova_carter
 episode_79:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - 1.52
-  - 14.28
+  - -13.22
+  - -6.36
   - 0.01
-  start_yaw: -90
+  start_yaw: 59
   goal:
-  - -22.43
-  - 22.95
+  - 1.82
+  - 24.5
   - 0.01
-  instruction: Turn around to exit the current aisle from the back. Then turn left to enter Aisle 5 and stop in front of the traffic cones.
-  timeout: 145
-  num_people: 45
+  instruction: Go straight to enter Aisle 06 (the last aisle from the left), passing the yellow forklift to reach the end of the aisle.
+  timeout: 180
+  num_people: 30
   robot_type: nova_carter
 episode_80:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - 1.52
-  - 14.28
+  - -13.22
+  - -6.36
   - 0.01
-  start_yaw: -90
+  start_yaw: 59
   goal:
-  - -22.43
-  - 22.95
+  - 1.82
+  - 24.5
   - 0.01
-  instruction: Turn around to exit the current aisle from the back. Then turn left to enter Aisle 5 and stop in front of the traffic cones.
-  timeout: 160
-  num_people: 60
-  robot_type: spot
+  instruction: Go straight to enter Aisle 06 (the last aisle from the left), passing the yellow forklift to reach the end of the aisle.
+  timeout: 190
+  num_people: 40
+  robot_type: nova_carter
 episode_81:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -18.98
-  - -14.3
+  - -18.1
+  - 0
   - 0.01
-  start_yaw: -141
+  start_yaw: 90
   goal:
-  - -22.43
-  - 22.95
+  - 0.2
+  - 25.92
   - 0.01
-  instruction: Go straight to reach Aisle 6, passing the yellow forklift. Continue to the end and stop near the red emergency stop button on the back wall.
-  timeout: 110
+  instruction: Go straight past the aisle ahead. Turn right at the end and proceed forward to approach the fire extinguisher on the last rack.
+  timeout: 130
   num_people: 0
   robot_type: nova_carter
 episode_82:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -18.98
-  - -14.3
+  - -18.1
+  - 0
   - 0.01
-  start_yaw: -141
+  start_yaw: 90
   goal:
-  - -22.43
-  - 22.95
+  - 0.2
+  - 25.92
   - 0.01
-  instruction: Go straight to reach Aisle 6, passing the yellow forklift. Continue to the end and stop near the red emergency stop button on the back wall.
-  timeout: 125
-  num_people: 15
-  robot_type: spot
+  instruction: Go straight past the aisle ahead. Turn right at the end and proceed forward to approach the fire extinguisher on the last rack.
+  timeout: 140
+  num_people: 10
+  robot_type: nova_carter
 episode_83:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -18.98
-  - -14.3
+  - -18.1
+  - 0
   - 0.01
-  start_yaw: -141
+  start_yaw: 90
   goal:
-  - -22.43
-  - 22.95
+  - 0.2
+  - 25.92
   - 0.01
-  instruction: Go straight to reach Aisle 6, passing the yellow forklift. Continue to the end and stop near the red emergency stop button on the back wall.
-  timeout: 140
-  num_people: 30
+  instruction: Go straight past the aisle ahead. Turn right at the end and proceed forward to approach the fire extinguisher on the last rack.
+  timeout: 150
+  num_people: 20
   robot_type: nova_carter
 episode_84:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -18.98
-  - -14.3
+  - -18.1
+  - 0
   - 0.01
-  start_yaw: -141
+  start_yaw: 90
   goal:
-  - -22.43
-  - 22.95
+  - 0.2
+  - 25.92
   - 0.01
-  instruction: Go straight to reach Aisle 6, passing the yellow forklift. Continue to the end and stop near the red emergency stop button on the back wall.
-  timeout: 155
-  num_people: 45
-  robot_type: spot
+  instruction: Go straight past the aisle ahead. Turn right at the end and proceed forward to approach the fire extinguisher on the last rack.
+  timeout: 160
+  num_people: 30
+  robot_type: nova_carter
 episode_85:
   scene: https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd
   start:
-  - -18.98
-  - -14.3
+  - -18.1
+  - 0
   - 0.01
-  start_yaw: -141
+  start_yaw: 90
   goal:
-  - -22.43
-  - 22.95
+  - 0.2
+  - 25.92
   - 0.01
-  instruction: Go straight to reach Aisle 6, passing the yellow forklift. Continue to the end and stop near the red emergency stop button on the back wall.
+  instruction: Go straight past the aisle ahead. Turn right at the end and proceed forward to approach the fire extinguisher on the last rack.
   timeout: 170
-  num_people: 60
+  num_people: 40
   robot_type: nova_carter

@@ -36,7 +36,7 @@ class TrainingConfig:
     # Number of future steps at 10 Hz for action-head targets (and ActionExpert num_chunks); e.g. 30 -> 3.0s
     action_horizon_steps: int = 30
     # Number of Transformer cross-attention blocks in the action head.
-    action_num_layers: int = 6
+    action_num_layers: int = 3
     image_size: Tuple[int, int] = (448, 448)
     
     # Training setup
