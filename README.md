@@ -241,6 +241,11 @@ Local paths are configured through environment variables:
 - `TICVLA_CHECKPOINT_PATH`: TIC-VLA checkpoint for DynaNav testing.
 - `TICVLA_OUTPUT_DIR`: output root for logs, checkpoints, and benchmark results.
 
+## Pretrained Checkpoint
+
+We release the pretrained **TIC-VLA** checkpoint trained on the released TIC-VLA reasoning dataset (SCAND, GND, and DynaNav). It can be downloaded from the [TIC-VLA Hugging Face dataset repository](https://huggingface.co/datasets/handsomeYun/TIC-VLA/blob/main/TIC-VLA-model.ckpt).
+
+
 ## Citation
 
 If you find this repository useful for your research, please cite:
