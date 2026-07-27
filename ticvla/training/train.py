@@ -20,7 +20,7 @@ import torch
 import torch.nn.functional as F
 import yaml
 from pytorch_lightning.callbacks import LearningRateMonitor, ModelCheckpoint
-from pytorch_lightning.loggers import CSVLogger, TensorBoardLogger
+from pytorch_lightning.loggers import CSVLogger, TensorBoardLogger, WandbLogger
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import LambdaLR
 
@@ -275,12 +275,22 @@ def create_callbacks(save_dir: str, stage: str) -> list:
     ]
 
 
-def create_loggers(experiment_name: str, save_dir: str, version: Optional[str] = None) -> list:
+def create_loggers(
+    experiment_name: str,
+    save_dir: str,
+    version: Optional[str] = None,
+    project_name: str = "tic-vla",
+) -> list:
     if version is None:
         version = datetime.now().strftime("%Y%m%d-%H%M%S")
     return [
         TensorBoardLogger(save_dir=save_dir, name=experiment_name, version=version, log_graph=False),
         CSVLogger(save_dir=save_dir, name=experiment_name, version=version),
+        WandbLogger(
+            project=project_name,
+            name=f"{experiment_name}-{version}",
+            save_dir=save_dir,
+        ),
     ]
 
 
@@ -348,6 +358,7 @@ def _create_trainer(config: TrainingConfig, stage: str) -> pl.Trainer:
             experiment_name=config.experiment_name,
             save_dir=stage_log_dir,
             version=run_version,
+            project_name=config.project_name,
         ),
         devices=-1,
         accelerator="auto",

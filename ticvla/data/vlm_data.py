@@ -105,6 +105,12 @@ class TICVLADataset_VLM(Dataset):
     - No action expert data
     """
 
+    # Samples need at least this many future steps so the 9s guidance waypoint
+    # (index 89 at 10 Hz) exists; shorter samples would bake the -100 sentinel
+    # into the assistant answer text.
+    MIN_FUTURE_STEPS = 90
+    _FUTURE_CACHE_NAME = '.ticvla_future_len_cache_v1.json'
+
     def __init__(self, data_dir: str | List[str], max_sequence_length: int = 90) -> None:
         self.data_dir = [Path(d) for d in data_dir] if isinstance(data_dir, list) else [Path(data_dir)]
         self.max_sequence_length = max_sequence_length
@@ -113,44 +119,89 @@ class TICVLADataset_VLM(Dataset):
         self._last_folder: Path | None = None
         self._consecutive_missing_count = 0
 
+    @staticmethod
+    def _count_future_offsets(path: Path) -> int:
+        try:
+            data = json.load(open(path, 'r'))
+        except Exception:
+            return -1
+        future = data.get('future', [])
+        return sum(1 for w in future if isinstance(w, dict) and 'offset' in w)
+
+    def _load_future_lengths(self, data_dir: Path, files: List[Path]) -> Dict[str, int]:
+        """Return {relative_path: future_offset_count} for files, scanning and caching once per data_dir."""
+        cache_path = data_dir / self._FUTURE_CACHE_NAME
+        cache: Dict[str, int] = {}
+        if cache_path.exists():
+            try:
+                cache = json.load(open(cache_path, 'r'))
+            except Exception:
+                cache = {}
+
+        rel_paths = [str(p.relative_to(data_dir)) for p in files]
+        missing = [(rel, p) for rel, p in zip(rel_paths, files) if rel not in cache]
+        if missing:
+            from concurrent.futures import ThreadPoolExecutor
+            with ThreadPoolExecutor(max_workers=16) as pool:
+                counts = list(pool.map(lambda item: self._count_future_offsets(item[1]), missing))
+            for (rel, _), count in zip(missing, counts):
+                cache[rel] = count
+            try:
+                tmp_path = cache_path.with_suffix('.tmp')
+                with open(tmp_path, 'w') as f:
+                    json.dump(cache, f)
+                os.replace(tmp_path, cache_path)
+            except OSError:
+                pass  # read-only data dir; scan again next run
+        return {rel: cache[rel] for rel in rel_paths}
+
     def _find_samples(self) -> List[Path]:
         """
         Find all JSON sample files in the data directories.
-        Filters to keep every 5th frame by sorting and indexing.
+        Filters to keep every 5th frame by sorting and indexing, then drops
+        samples with fewer than MIN_FUTURE_STEPS future offsets.
         """
-        all_samples: List[Path] = []
-        
-        # Collect all JSON files
-        for data_dir in self.data_dir:
-            for p in data_dir.rglob('*.json'):
-                all_samples.append(p)
-        
-        # Group by directory and sort each group to get every 5th frame
-        from collections import defaultdict
-        samples_by_dir = defaultdict(list)
-        for p in all_samples:
-            samples_by_dir[p.parent].append(p)
-        
-        # Sort each directory's files and take every 5th one
+        # Sort files by timestamp in filename
+        def get_timestamp_from_name(path: Path) -> float:
+            stem = path.stem
+            if '_' in stem:
+                try:
+                    timestamp_str = stem.split('_', 1)[1]
+                    return float(timestamp_str)
+                except (ValueError, IndexError):
+                    return 0.0
+            return 0.0
+
         filtered_samples: List[Path] = []
-        for dir_path, files in samples_by_dir.items():
-            # Sort files by timestamp in filename
-            def get_timestamp_from_name(path: Path) -> float:
-                stem = path.stem
-                if '_' in stem:
-                    try:
-                        timestamp_str = stem.split('_', 1)[1]
-                        return float(timestamp_str)
-                    except (ValueError, IndexError):
-                        return 0.0
-                return 0.0
-            
-            sorted_files = sorted(files, key=get_timestamp_from_name)
-            
-            # Take every 5th frame (index 0, 5, 10, 15, ...)
-            for idx in range(0, len(sorted_files), 5):
-                filtered_samples.append(sorted_files[idx])
-        
+        for data_dir in self.data_dir:
+            # Group by directory and sort each group to get every 5th frame
+            from collections import defaultdict
+            samples_by_dir = defaultdict(list)
+            for p in data_dir.rglob('*.json'):
+                if p.name == self._FUTURE_CACHE_NAME:
+                    continue
+                samples_by_dir[p.parent].append(p)
+
+            subsampled: List[Path] = []
+            for dir_path, files in samples_by_dir.items():
+                sorted_files = sorted(files, key=get_timestamp_from_name)
+                # Take every 5th frame (index 0, 5, 10, 15, ...)
+                for idx in range(0, len(sorted_files), 5):
+                    subsampled.append(sorted_files[idx])
+
+            future_lengths = self._load_future_lengths(data_dir, subsampled)
+            kept = [
+                p for p in subsampled
+                if future_lengths[str(p.relative_to(data_dir))] >= self.MIN_FUTURE_STEPS
+            ]
+            dropped = len(subsampled) - len(kept)
+            if dropped:
+                print(
+                    f"TICVLADataset_VLM: dropped {dropped}/{len(subsampled)} samples in {data_dir} "
+                    f"with < {self.MIN_FUTURE_STEPS} future steps"
+                )
+            filtered_samples.extend(kept)
+
         return filtered_samples
 
     def __len__(self) -> int:
@@ -578,11 +629,14 @@ class TICVLACollator_VLM:
         robot_types = [s.get('robot_type', '') for s in samples]
         image_paths = [s.get('images', []) for s in samples]
 
-        # Prepare chat text with placeholders
+        # Prepare chat text with placeholders. The messages already contain the
+        # assistant answer, so no generation prompt must be appended: with
+        # add_generation_prompt=True an empty trailing assistant header would
+        # leak into the training labels.
         text_batch: List[str] = self.processor.apply_chat_template(
             messages,
             tokenize=False,
-            add_generation_prompt=True,
+            add_generation_prompt=False,
         )
         raw_prompt_text = text_batch
 

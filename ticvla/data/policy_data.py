@@ -114,6 +114,9 @@ class TICVLADataset(Dataset):
             raise ValueError(f"action_horizon_steps must be >= 1, got {action_horizon_steps}")
         self.action_horizon_steps = action_horizon_steps
         self.samples = self.vlm_dataset.samples
+        # Per-directory sorted JSON file lists, built lazily. Avoids re-globbing
+        # and re-sorting the directory on every __getitem__.
+        self._dir_files_cache: Dict[Path, List[Path]] = {}
 
     def __len__(self) -> int:
         return len(self.samples)
@@ -283,20 +286,20 @@ class TICVLADataset(Dataset):
         guidance_waypoint = torch.ones(9, dtype=torch.float32) * -100  # Will be set from delayed frame
 
         # Extract relative time from current sample (prefer timestamp field for relative time)
-        current_time = data.get('timestamp')  # Relative time
-        
+        current_time = float(data.get('timestamp') or 0.0)  # Relative time
+
         # Sample a latency delay uniformly from 0-10s, capped by available history.
         max_delay = min(10.0, current_time) if current_time > 0 else 0.0
         time_delay = max_delay * np.random.rand()
 
         # elapsed_time is the relative time (time since start)
-        elapsed_time = float(current_time)
-        
+        elapsed_time = current_time
+
         # Find delayed sample using index order within the same directory
         # Files in each directory are sampled at 0.1s intervals (10Hz)
         # So to go back time_delay seconds, we need to go back time_delay / 0.1 = time_delay * 10 files
         delayed_sample = None
-        
+
         # Get all files in the same directory as current sample, sorted by numeric filename
         sample_dir = sample.parent
         if sample_dir.exists():
@@ -310,15 +313,23 @@ class TICVLADataset(Dataset):
                     except ValueError:
                         raise ValueError(f"Filename {path} has non-numeric suffix: {numeric_str}")
                 raise ValueError(f"Filename {path} doesn't have expected format (prefix_number)")
-            
-            # Get all JSON files in the directory and sort them
-            all_files_in_dir = sorted(sample_dir.glob('*.json'), key=get_numeric_key)
-            
+
+            # Get all JSON files in the directory and sort them (cached per directory)
+            all_files_in_dir = self._dir_files_cache.get(sample_dir)
+            if all_files_in_dir is None:
+                all_files_in_dir = sorted(sample_dir.glob('*.json'), key=get_numeric_key)
+                self._dir_files_cache[sample_dir] = all_files_in_dir
+
             # Find current file's index within this directory
             current_idx = all_files_in_dir.index(sample)
-            
+
             files_back = int(time_delay / 0.1)  # = time_delay * 10
-            delayed_idx = current_idx - files_back
+            # Clamp so the sampled delay never reaches before the trajectory start;
+            # a negative index would wrap around and pick a FUTURE frame from the
+            # end of the directory as the "delayed" observation.
+            delayed_idx = max(0, current_idx - files_back)
+            # Keep the reported delay consistent with the frame actually used.
+            time_delay = (current_idx - delayed_idx) * 0.1
             delayed_sample = all_files_in_dir[delayed_idx]
 
         previous_waypoints_text = ""
@@ -482,11 +493,12 @@ class TICVLACollator:
             current_image_paths.append([current_img] if current_img else [])
 
         # Prepare chat text for delayed frame context (past images + COT + instruction)
-        # Messages already contain the delayed frame context
+        # Messages already contain the delayed frame context including the
+        # assistant answer, so no generation prompt must be appended.
         text_batch: List[str] = self.processor.apply_chat_template(
             messages,
             tokenize=False,
-            add_generation_prompt=True,
+            add_generation_prompt=False,
         )
 
         # Gather delayed frame image tiles
@@ -538,6 +550,24 @@ class TICVLACollator:
                 start_idx = delayed_labels.shape[1] - 1
             delayed_labels[i, :start_idx] = -100
 
+        # Load current-frame image tiles in the dataloader worker so the training
+        # step can batch-encode them instead of loading per sample on the GPU rank.
+        current_pixel_values_list: List[Optional[torch.Tensor]] = []
+        for paths in current_image_paths:
+            if paths:
+                current_pixel_values_list.append(
+                    load_image_to_tensor(paths[0], image_size=self.image_size, max_num=1)
+                )
+            else:
+                current_pixel_values_list.append(None)
+        current_tile_shape = next((t.shape for t in current_pixel_values_list if t is not None), None)
+        current_pixel_values = None
+        if current_tile_shape is not None:
+            current_pixel_values = torch.stack([
+                t if t is not None else torch.zeros(current_tile_shape)
+                for t in current_pixel_values_list
+            ], dim=0).to(torch.bfloat16)  # (B, tiles, C, H, W)
+
         batch: Dict[str, Any] = {
             # Delayed frame inputs (for VLM model state)
             'delayed_input_ids': delayed_input_ids,
@@ -547,6 +577,8 @@ class TICVLACollator:
             'robot_type': robot_types,
             'delayed_image_paths': delayed_image_paths,
         }
+        if current_pixel_values is not None:
+            batch['current_pixel_values'] = current_pixel_values
 
         if delayed_pixel_values is not None:
             batch['delayed_pixel_values'] = delayed_pixel_values
@@ -612,7 +644,14 @@ class TICVLADataModule(pl.LightningDataModule):
                 n = len(self.train_dataset)
                 val_size = max(1, n // 20)
                 train_size = n - val_size
-                self.train_dataset, self.val_dataset = torch.utils.data.random_split(self.train_dataset, [train_size, val_size])
+                # Seeded so the train/val split is identical across runs and ranks
+                # (the VLM stage uses the same seed).
+                split_generator = torch.Generator().manual_seed(42)
+                self.train_dataset, self.val_dataset = torch.utils.data.random_split(
+                    self.train_dataset,
+                    [train_size, val_size],
+                    generator=split_generator,
+                )
         if stage in (None, 'test') and self.test_data_dir:
             self.test_dataset = TICVLADataset(
                 [self.test_data_dir], self.max_sequence_length, self.action_horizon_steps,

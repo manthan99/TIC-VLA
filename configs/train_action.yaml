@@ -8,8 +8,9 @@ train_data_dir:
 val_data_dir: null
 test_data_dir: null
 
-batch_size: 64
-num_workers: 8
+# Paper setup: action expert trained with batch 16 per GPU, AdamW cosine from 2e-4.
+batch_size: 16
+num_workers: 12
 max_sequence_length: 90
 action_horizon_steps: 30
 action_num_layers: 3
@@ -17,8 +18,8 @@ action_num_layers: 3
 model_path: "${TICVLA_BASE_MODEL_PATH}"
 vlm_checkpoint: "${TICVLA_OUTPUT_DIR}/checkpoints/ticvla/vlm/last.ckpt"
 
-learning_rate: 1.0e-4
-weight_decay: 1.0e-3
+learning_rate: 2.0e-4
+weight_decay: 1.0e-2
 max_epochs: 10
 warmup_steps: 1000
 precision: "bf16-mixed"

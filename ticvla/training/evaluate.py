@@ -84,7 +84,9 @@ class TICVLATester:
         # Load both VLM and action expert from the same checkpoint
         if config.ckpt_path and os.path.exists(config.ckpt_path):
             logger.info(f"Loading checkpoint (VLM + action expert): {config.ckpt_path}")
-            checkpoint = torch.load(config.ckpt_path, map_location='cpu')
+            # weights_only=False: Lightning checkpoints contain non-tensor objects
+            # that torch>=2.6 refuses to load by default.
+            checkpoint = torch.load(config.ckpt_path, map_location='cpu', weights_only=False)
             state_dict = checkpoint.get("state_dict", {})
             
             # Debug: Show available keys

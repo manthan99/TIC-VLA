@@ -277,7 +277,9 @@ class TICVLA(nn.Module):
         if not os.path.exists(checkpoint_path):
             raise FileNotFoundError(f"Checkpoint file not found: {checkpoint_path}")
         
-        checkpoint = torch.load(checkpoint_path, map_location="cpu")
+        # weights_only=False: Lightning checkpoints contain non-tensor objects
+        # (loops, callbacks) that torch>=2.6 refuses to load by default.
+        checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
         state_dict = checkpoint.get("state_dict", {})
         
         has_direct_vlm_keys = any(k.startswith("model.vlm.") for k in state_dict.keys())
@@ -435,8 +437,18 @@ class TICVLA(nn.Module):
             )
         
         # Visual features → per-sample token sequences (current frame image)
-        # Extract visual features from current frame images (for action expert)
-        if current_image_paths and len(current_image_paths) > 0:
+        # Preferred path: collator already loaded current-frame tiles, so encode
+        # the whole batch with a single vision-tower call.
+        current_pixel_values = batch.get('current_pixel_values', None)
+        if current_pixel_values is not None:
+            B_cur, tiles = current_pixel_values.shape[0], current_pixel_values.shape[1]
+            flat_pixels = current_pixel_values.reshape(-1, *current_pixel_values.shape[2:])
+            flat_pixels = flat_pixels.to(self.device).to(torch.bfloat16)
+            with torch.no_grad():
+                img_embeds = self.vlm.extract_feature(flat_pixels)  # (B*tiles, num_img_tokens, H)
+            image_embeds = img_embeds.reshape(B_cur, -1, img_embeds.shape[-1])  # (B, tiles*tokens, H)
+        # Fallback: extract features from image paths one sample at a time.
+        elif current_image_paths and len(current_image_paths) > 0:
             # Extract embeddings for each sample's current image
             current_image_embeds_list = []
             for paths in current_image_paths:
